@@ -67,3 +67,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+favorite:
+  drink: coffee
+  food: pizza
