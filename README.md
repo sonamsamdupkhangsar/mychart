@@ -1,5 +1,9 @@
 # shelm - my Helm chart 
 
+## This Helm chart is built from the helm template
+```helm create shelm```
+This will generate a template project.
+
 ## add chart 
 ```helm repo add sonam https://sonamsamdupkhangsar.github.io/mychart/```
 
@@ -12,3 +16,5 @@ Helm deploy with package name
 
 #create the index.yaml
 helm repo index --url https://sonamsamdupkhangsar.github.io/mychart/ .
+
+helm install authserver sonam/mychart --set image.repository=sonamsamdupkhangsar/openid_connect_app
