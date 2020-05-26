@@ -1,4 +1,4 @@
-# mychart - my Helm chart 
+# shelm - my Helm chart 
 
 ## add chart 
 ```helm repo add sonam https://sonamsamdupkhangsar.github.io/mychart/```
