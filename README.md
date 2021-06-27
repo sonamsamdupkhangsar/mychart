@@ -7,7 +7,7 @@ helm create shelm
 This will generate a template project.
 
 ## add chart 
-```helm repo add sonam https://sonamsamdupkhangsar.github.io/mychart/```
+```helm repo add sonam https://sonamsamdupkhangsar.github.io/sonam-helm-chart/```
 
 ## Deploy default app within chart
 Helm deploy with auto generated name for package
