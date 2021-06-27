@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: prydonius/todo
-  tag: 1.0.0
+  repository: localhost:5000/kecha
+  tag: prod
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -71,3 +71,17 @@ affinity: {}
 favorite:
   drink: coffee
   food: pizza
+
+postgres:
+  secretfile: sonam.kecha-minimal-cluster.credentials.postgresql.acid.zalan.do
+  service: kecha-minimal-cluster
+  dbname: kecha
+  port: 5432   
+
+envs:
+  - name: SPRING_PROFILES_ACTIVE
+    value: prod
+  - name: JWT_EXPIRE_CALENDAR_FIELD
+    value: 5
+  - name: JWT_EXPIRE_CALENDAR_VALUE
+    value: 25

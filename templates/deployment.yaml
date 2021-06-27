@@ -29,7 +29,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.http.port }}
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -41,6 +41,29 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+          {{- range .Values.envs }}
+            - name: {{ .name }}
+              value: {{ .value }}
+          {{- end }}
+          {{- if .Values.postgres }}
+            - name: {{ printf "POSTGRES_USERNAME" }}
+            - valueFrom:
+                secretKeyRef: 
+                    name: {{ .Values.postgres.secretfile }}
+                    key: user
+            - name: {{ printf "POSTGRES_PASSWORD" }}
+            - valueFrom:
+                secretKeyRef: 
+                    name: {{ .Values.postgres.secretfile }}
+                    key: password
+            - name: {{ printf "POSTGRES_SERVICE" }}
+            - value: {{ .Values.postgres.service }}
+            - name: {{ printf "POSTGRES_DBNAME" }}
+            - value: {{ .Values.postgres.dbname }}
+            - name: {{ printf "POSTGRES_PORT" }}
+            - value: {{ .Values.postgres.port }}        
+          {{- end }}  
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
