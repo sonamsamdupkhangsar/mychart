@@ -21,6 +21,6 @@ helm install example1 sonam/mychart
 ```
 
 #create the index.yaml
-helm repo index --url https://sonamsamdupkhangsar.github.io/mychart/ .
+helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .
 
 helm install authserver sonam/mychart --set image.repository=sonamsamdupkhangsar/openid_connect_app
