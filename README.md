@@ -24,3 +24,7 @@ helm install example1 sonam/mychart
 helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .
 
 helm install authserver sonam/mychart --set image.repository=sonamsamdupkhangsar/openid_connect_app
+
+
+install locally
+ helm install kecha ../../github/sonam-helm-chart -f values.yaml   
