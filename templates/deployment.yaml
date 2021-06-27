@@ -44,25 +44,25 @@ spec:
           env:
           {{- range .Values.envs }}
             - name: {{ .name }}
-              value: {{ .value }}
+              value: {{ .value | quote }}
           {{- end }}
           {{- if .Values.postgres }}
-            - name: {{ printf "POSTGRES_USERNAME" }}
-            - valueFrom:
+            - name: POSTGRES_USERNAME
+              valueFrom:
                 secretKeyRef: 
                     name: {{ .Values.postgres.secretfile }}
                     key: user
-            - name: {{ printf "POSTGRES_PASSWORD" }}
-            - valueFrom:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
                 secretKeyRef: 
                     name: {{ .Values.postgres.secretfile }}
                     key: password
-            - name: {{ printf "POSTGRES_SERVICE" }}
-            - value: {{ .Values.postgres.service }}
-            - name: {{ printf "POSTGRES_DBNAME" }}
-            - value: {{ .Values.postgres.dbname }}
-            - name: {{ printf "POSTGRES_PORT" }}
-            - value: {{ .Values.postgres.port }}        
+            - name: POSTGRES_SERVICE
+              value: {{ .Values.postgres.service | quote }}
+            - name: POSTGRES_DBNAME
+              value: {{ .Values.postgres.dbname | quote }}
+            - name: POSTGRES_PORT
+              value: {{ .Values.postgres.port | quote }}        
           {{- end }}  
       {{- with .Values.nodeSelector }}
       nodeSelector:
