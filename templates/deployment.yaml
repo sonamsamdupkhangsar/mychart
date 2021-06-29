@@ -29,22 +29,22 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /api/health/liveness
               port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            failureThreshold: 10  
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 5  
           readinessProbe:
             httpGet:
-              path: /
+              path: /api/health/readiness
               port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            failureThreshold: 10
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 5
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
