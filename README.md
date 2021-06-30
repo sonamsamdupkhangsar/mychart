@@ -28,3 +28,6 @@ helm install authserver sonam/mychart --set image.repository=sonamsamdupkhangsar
 
 install locally
  helm install kecha ../../github/sonam-helm-chart -f values.yaml   
+
+ dry run to generate yaml
+  helm install kecha ../../github/sonam-helm-chart --version 0.1.3 -f values.yaml --dry-run 

@@ -31,21 +31,34 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          livenessProbe:
+          {{- if .Values.health }}
+          livenessProbe:                          
             httpGet:
-              path: /api/health/liveness
-              port: 8080
+              path: {{ .Values.health.liveness.path }}
+              port: {{ .Values.health.liveness.port }}
+            {{- if .Values.health.liveness.initialDelaySeconds }}  
             initialDelaySeconds: 5
+            {{- end }}
+            {{- if .Values.health.liveness.periodSeconds }}  
             periodSeconds: 5
-            failureThreshold: 5  
+            {{- end }}
+            {{- if .Values.health.liveness.failureThreshold }}  
+            failureThreshold: 5
+            {{- end }}
           readinessProbe:
             httpGet:
-              path: /api/health/readiness
-              port: 8080
+              path: {{ .Values.health.readiness.path }}
+              port: {{ .Values.health.readiness.port }}
+            {{- if .Values.health.readiness.initialDelaySeconds }}  
             initialDelaySeconds: 5
+            {{- end }}
+            {{- if .Values.health.readiness.periodSeconds }}  
             periodSeconds: 5
+            {{- end }}
+            {{- if .Values.health.readiness.failureThreshold }}  
             failureThreshold: 5
-
+            {{- end }}              
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
