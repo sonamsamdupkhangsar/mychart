@@ -9,10 +9,12 @@ spec:
   selector:
     matchLabels:
       {{- include "mychart.selectorLabels" . | nindent 6 }}
+      app: {{ include "mychart.fullname" . }}
   template:
     metadata:
       labels:
         {{- include "mychart.selectorLabels" . | nindent 8 }}
+        app: {{ include "mychart.fullname" . }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
