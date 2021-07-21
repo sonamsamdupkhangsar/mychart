@@ -10,11 +10,14 @@ Build the index.yaml:
 ``` helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .```
 
 Deploy chart using sonam-helm-chart 
-``` helm install sonam/mychart -f values.yaml  --generate-name ```
+``` helm install kecha sonam/mychart -f values.yaml```
+
+## add chart 
+```helm repo add sonam https://sonamsamdupkhangsar.github.io/sonam-helm-chart/```
 
 The following is a sample of deploying a app using ```values.yaml``` file
 ```
-myname@Sonams-MacBook-Pro kecha-webapp %  helm install kecha sonam/mychart -f values.yaml            
+> helm install kecha sonam/mychart -f values.yaml            
 NAME: kecha
 LAST DEPLOYED: Wed Jul 21 15:52:39 2021
 NAMESPACE: default
@@ -25,11 +28,8 @@ NOTES:
   export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=mychart,app.kubernetes.io/instance=kecha" -o jsonpath="{.items[0].metadata.name}")
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl --namespace default port-forward $POD_NAME 8080:80
-myname@Sonams-MacBook-Pro kecha-webapp % 
+```
 
-
-## add chart 
-```helm repo add sonam https://sonamsamdupkhangsar.github.io/sonam-helm-chart/```
 
 ## Deploy default app within chart
 Helm deploy with auto generated name for package
@@ -42,17 +42,14 @@ Helm deploy with package name
 helm install example1 sonam/mychart
 ```
 
-#create the index.yaml
-helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .
-
 install locally
 ```helm install kecha ../../github/sonam-helm-chart -f values.yaml```   
 
  dry run to generate yaml
-  helm install kecha ../../github/sonam-helm-chart --version 0.1.3 -f values.yaml --dry-run 
+```helm install kecha ../../github/sonam-helm-chart --version 0.1.3 -f values.yaml --dry-run ```
 
 another way to generate yamls for debug
-  helm template -n stage kechaapp ../../github/sonam-helm-chart --version 0.1.4 -f values.yaml --debug
+ ```helm template -n stage kechaapp ../../github/sonam-helm-chart --version 0.1.4 -f values.yaml --debug```
 
 ### port-forward from a service
 > kubectl get svc
