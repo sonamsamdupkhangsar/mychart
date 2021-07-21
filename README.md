@@ -1,4 +1,7 @@
-# shelm - my Helm chart 
+# sonam-helm-chart - my Helm chart 
+This Helm chart will deploy a Istio virtual service using a gateway.
+It will also setup the Postgres secret file's username/password as envrionment variables.
+
 
 ## This Helm chart is built from the helm template
 ```
