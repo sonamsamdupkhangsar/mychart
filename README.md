@@ -81,8 +81,3 @@ istio-demo % curl -v http://localhost
 < server: istio-envoy
 < transfer-encoding: chunked
 < 
-
-
-## had issues with helm install
-
-```
