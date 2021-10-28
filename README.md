@@ -84,3 +84,47 @@ istio-demo % curl -v http://localhost
 < server: istio-envoy
 < transfer-encoding: chunked
 < 
+
+
+This Helm chart assumes a postgres-operator is used for deploying the Postgres database cluster.
+I use this https://github.com/zalando/postgres-operator/blob/master/docs/quickstart.md#deployment-options for deploying a Postres operator.
+
+To deploy postgres-operator:
+```helm install postgres-operator ./charts/postgres-operator```
+
+To deploy the postgres operator UI:
+```helm install postgres-operator-ui ./charts/postgres-operator-ui```
+
+To deploy a postgres db cluster:
+```kubectl create -f manifests/minimal-postgres-manifest.yaml```
+
+To see the postgresql cluster deployment:
+```kubectl get postgresql```
+
+
+To install istio:
+```./istioctl install```
+
+Personal docker registry:
+To start a docker registry:
+```docker run -d -p 5000:5000 --restart=always --name registry registry:2```
+To stop the docker registry:
+```docker container stop registry```
+
+Check istio-demo project for gateway setup or use the following for setting up a gateway:
+```
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - '*'
+```
