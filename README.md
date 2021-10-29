@@ -131,6 +131,14 @@ spec:
 
 ## port-forward k8 postgresql database master pod connection to local machine:
 
+Get postgresql cluster name:
+
+```
+kubectl get postgresql
+NAME                    TEAM    VERSION   PODS   VOLUME   CPU-REQUEST   MEMORY-REQUEST   AGE   STATUS
+kecha-minimal-cluster   kecha   13        2      1Gi                                     38d   Running
+```
+
 Get master pod name of pgsql cluster PGMASTER variable:
 
 ```
