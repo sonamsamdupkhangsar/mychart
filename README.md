@@ -128,3 +128,42 @@ spec:
       hosts:
         - '*'
 ```
+
+## port-forward k8 postgresql database master pod connection to local machine:
+
+Get master pod name of pgsql cluster PGMASTER variable:
+
+```
+export PGMASTER=$(kubectl get pods -o jsonpath={.items..metadata.name} -l application=spilo,cluster-name=kecha-minimal-cluster,spilo-role=master -n default)  
+```
+
+ Port-forward to port 6432 with the master pod  name:
+
+```
+kubectl port-forward $PGMASTER 6432:5432 -n default
+Forwarding from 127.0.0.1:6432 -> 5432
+Forwarding from [::1]:6432 -> 5432
+```
+
+###  Connecting to port-forwarded pgsql master-pod
+I am using my generated secret file by the operator "sonam.kecha-minimal-cluster.credentials.postgresql.acid.zalan.do" to store the password in PGPASSWORD variable.
+
+```
+export PGPASSWORD=$(kubectl get secret sonam.kecha-minimal-cluster.credentials.postgresql.acid.zalan.do -o 'jsonpath={.data.password}' | base64 -d)
+export PGSSLMODE=require
+psql -U kecha -h localhost -p 6432
+```
+
+If you need to find the username too then just replace '.data.password' with '.data.username' field:
+```
+export PGUSER=$(kubectl get secret sonam.kecha-minimal-cluster.credentials.postgresql.acid.zalan.do -o 'jsonpath={.data.username}' | base64 -d)
+``` 
+
+If your username (sonam) and database (db=kecha) are different then specify them separately:
+```
+ psql -U sonam -d kecha -h localhost -p 6432 
+ ```
+
+
+
+
