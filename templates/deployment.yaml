@@ -39,26 +39,26 @@ spec:
               path: {{ .Values.health.liveness.path }}
               port: {{ .Values.health.liveness.port }}
             {{- if .Values.health.liveness.initialDelaySeconds }}  
-            initialDelaySeconds: 5
+            initialDelaySeconds: {{ .Values.health.liveness.initialDelaySeconds }}
             {{- end }}
             {{- if .Values.health.liveness.periodSeconds }}  
-            periodSeconds: 5
+            periodSeconds: {{ .Values.health.liveness.periodSeconds }}
             {{- end }}
             {{- if .Values.health.liveness.failureThreshold }}  
-            failureThreshold: 5
+            failureThreshold: {{ .Values.health.liveness.failureThreshold }}
             {{- end }}
           readinessProbe:
             httpGet:
               path: {{ .Values.health.readiness.path }}
               port: {{ .Values.health.readiness.port }}
             {{- if .Values.health.readiness.initialDelaySeconds }}  
-            initialDelaySeconds: 5
+            initialDelaySeconds: {{ .Values.health.readiness.initialDelaySeconds }}
             {{- end }}
             {{- if .Values.health.readiness.periodSeconds }}  
-            periodSeconds: 5
+            periodSeconds: {{ .Values.health.readiness.periodSeconds }}
             {{- end }}
             {{- if .Values.health.readiness.failureThreshold }}  
-            failureThreshold: 5
+            failureThreshold: {{ .Values.health.readiness.failureThreshold }} 
             {{- end }}              
           {{- end }}
           resources:
