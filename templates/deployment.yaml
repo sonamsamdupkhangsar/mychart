@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "mychart.fullname" . }}
+  namespace: backend
   labels:
     {{- include "mychart.labels" . | nindent 4 }}
 spec:
@@ -10,6 +11,8 @@ spec:
     matchLabels:
       {{- include "mychart.selectorLabels" . | nindent 6 }}
       app: {{ include "mychart.fullname" . }}
+  strategy:
+    type: RollingUpdate  
   template:
     metadata:
       labels:

@@ -3,6 +3,8 @@ This Helm chart will deploy a Istio virtual service using a gateway.
 It will also setup the Postgres secret file's username/password as envrionment variables.
 
 When updating do the following
+ helm repo remove sonam
+ 
 ```
 helm package .
 helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .
