@@ -1,12 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "mychart.fullname" . }}
-  {{- if .Values.namespace }}
-  namespace: {{ .Values.namespace }}
-  {{- else }}
-  namespace: default
-  {{- end }}
+  name: {{ include "mychart.fullname" . }}  
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "mychart.labels" . | nindent 4 }}
 spec:

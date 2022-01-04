@@ -4,13 +4,14 @@ It will also setup the Postgres secret file's username/password as envrionment v
 
 When updating do the following
  helm repo remove sonam
- 
+
 ```
 helm package .
 helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .
 ```
 also remove the old helm chart
-
+ helm repo remove sonam 
+ 
 ## This Helm chart is built from the helm template
 ```
 helm create shelm
