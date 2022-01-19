@@ -1,0 +1,13 @@
+{{- if .Values.ambassador -}}
+{{- $fullName := include "mychart.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: {{ $fullName }}-{{ .Release.Namespace }}
+  namespace: ambassador
+spec:
+  prefix: /{{ $fullName }}/
+  host: {{ .Values.ambassador.host }}
+  service: {{ $fullName }}-{{ .Release.Namespace }}
+{{- end }}

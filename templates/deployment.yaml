@@ -68,23 +68,35 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
           {{- range .Values.envs }}
-            - name: {{ .name }}
-              value: {{ .value | quote }}
+            - name: {{ .name }}            
+              value: {{ .value | quote }}            
           {{- end }}
           {{- if .Values.postgres }}
+           {{- if .Values.postgres.postgresUsername }}
+            - name: {{ .Values.postgres.postgresUsername }}
+           {{- else }}
             - name: POSTGRES_USERNAME
+           {{- end }} 
               valueFrom:
                 secretKeyRef: 
                     name: {{ .Values.postgres.secretfile }}
                     key: username
+           {{- if .Values.postgres.postgresPassword }}         
+            - name: {{ .Values.postgres.postgresPassword }}
+           {{- else }}
             - name: POSTGRES_PASSWORD
+           {{- end }} 
               valueFrom:
                 secretKeyRef: 
                     name: {{ .Values.postgres.secretfile }}
                     key: password
             - name: POSTGRES_SERVICE
               value: {{ .Values.postgres.service | quote }}
+           {{- if .Values.postgres.postgresDbname }}   
+            - name: {{ .Values.postgres.postgresDbname }}
+           {{- else }}
             - name: POSTGRES_DBNAME
+           {{- end }} 
               value: {{ .Values.postgres.dbname | quote }}
             - name: POSTGRES_PORT
               value: {{ .Values.postgres.port | quote }}        
