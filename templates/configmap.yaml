@@ -4,6 +4,3 @@ metadata:
   name: {{ .Release.Name }}-configmap
 data:
   myvalue: "HelloWorld"
-  drink: {{ .Values.favorite.drink | default "tea" | quote}}
-  food: {{ .Values.favorite.food | quote }}
-  {{ if eq .Values.favorite.drink "cofee" }}mug: true{{ end }}
