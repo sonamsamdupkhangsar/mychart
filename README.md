@@ -1,42 +1,25 @@
 # sonam-helm-chart - my Helm chart 
-This Helm chart will deploy a Istio virtual service using a gateway.
-It will also setup the Postgres secret file's username/password as envrionment variables.
+This Helm chart will deploy app using a Nginx Ingress controller on a Kubernetes cluster.
 
-When updating do the following
- helm repo remove sonam
+This chart can also support creation of environment variables for a postgres deployment.
 
-```
-helm package .
-helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .
-```
-also remove the old helm chart
- helm repo remove sonam 
- 
-## This Helm chart is built from the helm template
-```
-helm create shelm
-```
-This will generate a template project.
+For users, add the following chart to your environment:
 
-Build the index.yaml:
-``` helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .```
-
-Deploy chart using sonam-helm-chart 
-``` helm install kecha sonam/mychart -f values.yaml```
-
-## add chart 
 ```helm repo add sonam https://sonamsamdupkhangsar.github.io/sonam-helm-chart/```
 
+To deploy:
 
-## Deploy default app within chart
-Helm deploy with auto generated name for package
-```
-helm install sonam/mychart --generate-name
-```
+``` helm install kecha sonam/mychart -f values.yaml```
+ 
 
-Helm deploy with package name
-```
-helm install example1 sonam/mychart
+## The following instructions are for local development and debugging of this Helm chart purposes only.
+
+To remove previous Helm charts under the name 'sonam' `helm repo remove sonam`
+
+The following instruction for updating this Helm chart.  Run the following:
+``
+helm package .
+helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .
 ```
 
 install locally
@@ -47,7 +30,3 @@ install locally
 
 another way to generate yamls for debug
  ```helm template -n stage kechaapp ../../github/sonam-helm-chart --version 0.1.4 -f values.yaml --debug```
-
-
-
-
