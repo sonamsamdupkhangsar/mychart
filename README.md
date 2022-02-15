@@ -17,7 +17,7 @@ To deploy:
 To remove previous Helm charts under the name 'sonam' `helm repo remove sonam`
 
 The following instruction for updating this Helm chart.  Run the following:
-``
+```
 helm package .
 helm repo index --url https://sonamsamdupkhangsar.github.io/sonam-helm-chart/ .
 ```
