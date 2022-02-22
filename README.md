@@ -1,4 +1,6 @@
 # sonam-helm-chart - my Helm chart 
+<img src="https://helm.sh/img/helm.svg" width="100"/>  
+
 This Helm chart will deploy app using a Nginx Ingress controller on a Kubernetes cluster.
 
 Please see the sample-values.yaml file included in this chart for a sample.
