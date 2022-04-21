@@ -23,6 +23,11 @@ To deploy:
 ``` helm install kecha sonam/mychart -f values.yaml```
  
 
+## 0.1.15 version supports Oauth2-proxy
+This 0.1.15 now supports OAuth2 proxy setup to secure applications.  See `values-echo-oauth-backend.yaml` for how to 
+use this feature.
+
+
 ## The following instructions are for local development and debugging of this Helm chart purposes only.
 
 To remove previous Helm charts under the name 'sonam' `helm repo remove sonam`

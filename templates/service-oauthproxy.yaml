@@ -1,0 +1,20 @@
+{{- if .Values.oauth2proxy -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: oauth2proxy-{{ include "mychart.fullname" . }}  
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "mychart.labels" . | nindent 4 }}
+    k8s-app: oauth2proxy-{{ include "mychart.fullname" . }}
+spec:
+  type: {{ .Values.oauth2proxy.service.type }}
+  ports:
+    - port: {{ .Values.oauth2proxy.service.port }}      
+      targetPort: {{ .Values.oauth2proxy.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "mychart.selectorLabels" . | nindent 4 }}
+    k8s-app: oauth2proxy-{{ include "mychart.fullname" . }}
+{{- end }}

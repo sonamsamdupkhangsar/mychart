@@ -10,6 +10,10 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+args:
+  - value: --provider=github
+  - value: --email-domain=*
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: false

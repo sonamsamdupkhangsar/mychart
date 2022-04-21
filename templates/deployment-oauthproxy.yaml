@@ -1,0 +1,97 @@
+{{- if .Values.oauth2proxy -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oauth2proxy-{{ include "mychart.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "mychart.labels" . | nindent 4 }}
+    k8s-app: oauth2proxy-{{ include "mychart.fullname" . }}
+spec:
+  replicas: {{ .Values.oauth2proxy.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mychart.selectorLabels" . | nindent 6 }}
+      k8s-app: oauth2proxy-{{ include "mychart.fullname" . }}
+  strategy:
+    type: RollingUpdate  
+  template:
+    metadata:
+      labels:
+        {{- include "mychart.selectorLabels" . | nindent 8 }}
+        k8s-app: oauth2proxy-{{ include "mychart.fullname" . }}
+    spec:
+    {{- with .Values.oauth2proxy.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "mychart.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.oauth2proxy.podSecurityContext | nindent 8 }}
+      containers:        
+        - name: oauth2proxy-{{ .Chart.Name }}
+          {{- if .Values.oauth2proxy.image.args }}
+          args:
+            {{ range .Values.oauth2proxy.image.args }}
+            -  {{ . }}                               
+            {{ end }}
+          {{- end }}   
+          securityContext:
+            {{- toYaml .Values.oauth2proxy.securityContext | nindent 12 }}
+          image: "{{ .Values.oauth2proxy.image.repository }}:{{ .Values.oauth2proxy.image.tag}}"
+          imagePullPolicy: {{ .Values.oauth2proxy.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.oauth2proxy.container.ports.containerPort }}
+              protocol: {{ .Values.oauth2proxy.container.ports.protocol }}
+          {{- if .Values.oauth2proxy.health }}
+          livenessProbe:                          
+            httpGet:
+              path: {{ .Values.oauth2proxy.health.liveness.path }}
+              port: {{ .Values.oauth2proxy.health.liveness.port }}
+            {{- if .Values.oauth2proxy.health.liveness.initialDelaySeconds }}  
+            initialDelaySeconds: {{ .Values.oauth2proxy.health.liveness.initialDelaySeconds }}
+            {{- end }}
+            {{- if .Values.oauth2proxy.health.liveness.periodSeconds }}  
+            periodSeconds: {{ .Values.oauth2proxy.health.liveness.periodSeconds }}
+            {{- end }}
+            {{- if .Values.oauth2proxy.health.liveness.failureThreshold }}  
+            failureThreshold: {{ .Values.oauth2proxy.health.liveness.failureThreshold }}
+            {{- end }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.oauth2proxy.health.readiness.path }}
+              port: {{ .Values.oauth2proxy.health.readiness.port }}
+            {{- if .Values.oauth2proxy.health.readiness.initialDelaySeconds }}  
+            initialDelaySeconds: {{ .Values.oauth2proxy.health.readiness.initialDelaySeconds }}
+            {{- end }}
+            {{- if .Values.oauth2proxy.health.readiness.periodSeconds }}  
+            periodSeconds: {{ .Values.oauth2proxy.health.readiness.periodSeconds }}
+            {{- end }}
+            {{- if .Values.oauth2proxy.health.readiness.failureThreshold }}  
+            failureThreshold: {{ .Values.oauth2proxy.health.readiness.failureThreshold }} 
+            {{- end }}              
+          {{- end }}
+          resources:
+            {{- toYaml .Values.oauth2proxy.resources | nindent 12 }}
+          env:
+          {{- range .Values.oauth2proxy.envs }}
+            - name: {{ .name }}            
+              value: {{ .value | quote }}            
+          {{- end }}
+          {{- range .Values.oauth2proxy.secretenvs }}
+            - name: {{ .name }}            
+              value: {{ .value | quote }}            
+          {{- end }}          
+      {{- with .Values.oauth2proxy.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.oauth2proxy.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.oauth2proxy.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+{{- end }}
