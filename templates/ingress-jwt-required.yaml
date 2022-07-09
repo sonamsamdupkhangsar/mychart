@@ -8,7 +8,7 @@ apiVersion: extensions/v1
 {{- end }}
 kind: Ingress
 metadata:
-  name: ingress-{{ $fullName }}
+  name: ingressjwtrequired-{{ $fullName }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "mychart.labels" . | nindent 4 }}
