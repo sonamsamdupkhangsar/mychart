@@ -1,0 +1,75 @@
+--- 
+affinity: {}
+args: 
+  - 
+    value: "--provider=github"
+  - 
+    value: "--email-domain=*"
+envs: 
+  - 
+    name: DBNAME
+    value: mydatabase
+fullnameOverride: ""
+image: 
+  pullPolicy: IfNotPresent
+ingresses: 
+  config: 
+    - 
+      ingress: 
+        annotations: 
+          nginx.ingress.kubernetes.io/auth-url: "http://jwt-rest-service-mychart.backend.svc.cluster.local:80/validate"
+          nginx/client_max_body_size: 500m
+        hosts: 
+          - 
+            host: subdomain.domain.com
+            paths: 
+              - 
+                path: /
+                pathType: Prefix
+        name: auth
+        tls: 
+          - 
+            hosts: 
+              - "*.domain.com"
+            secretName: domain.com
+    - 
+      ingress: 
+        annotations: 
+          nginx/client_max_body_size: 500m
+        hosts: 
+          - 
+            host: subdomain.domain.com
+            paths: 
+              - 
+                path: /jwtnotrequired
+                pathType: Prefix
+        name: whitelist
+        tls: 
+          - 
+            hosts: 
+              - "*.domain.com"
+            secretName: domain.com
+  enabled: true
+  ingressClass: nginx
+istio: 
+  enabled: false
+nameOverride: ""
+nodeSelector: {}
+podSecurityContext: {}
+postgres: 
+  port: "5432"
+  postgresDbname: PACT_BROKER_DATABASE_NAME
+  postgresPassword: PACT_BROKER_DATABASE_PASSWORD
+  postgresUsername: PACT_BROKER_DATABASE_USERNAME
+replicaCount: 1
+resources: {}
+securityContext: {}
+service: 
+  port: 80
+  targetPort: 9292
+  type: ClusterIP
+serviceAccount: 
+  annotations: {}
+  create: false
+  name: ~
+tolerations: []

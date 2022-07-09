@@ -45,6 +45,14 @@ install locally
 ```helm install kecha ../../github/sonam-helm-chart --version 0.1.3 -f values.yaml --dry-run ```
 
 another way to generate yamls for debug
- ```helm template -n stage kechaapp ../../github/sonam-helm-chart --version 0.1.4 -f values.yaml --debug```
+ ```helm template -n stage kechaapp ../../github/sonam-helm-chart --version 0.1.16 -f values.yaml --debug```
 
  
+ ```
+helm upgrade --install --timeout 5m0s \
+            --set "image.repository=jmalloc/echo-server" \
+            --set "image.tag=latest" \
+            --set "project=echo" \            
+            echo \
+            sonam/mychart -f values-echo-oauth-backend.yaml --version 0.1.16 --namespace=backend --dry-run
+```
