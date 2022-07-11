@@ -1,4 +1,4 @@
-{{- if .Values.ingressjwtrequired.enabled -}}
+{{- if and .Values.ingressjwtrequired  .Values.ingressjwtrequired.enabled -}}
 {{- $fullName := include "mychart.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 {{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
