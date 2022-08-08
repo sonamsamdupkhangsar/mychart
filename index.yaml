@@ -2,33 +2,13 @@ apiVersion: v1
 entries:
   mychart:
   - apiVersion: v2
-    appVersion: 1.32.0
-    created: "2022-07-11T16:43:26.423176-06:00"
+    appVersion: 1.33.0
+    created: "2022-08-08T10:09:28.944842-06:00"
     description: A Helm chart for Kubernetes
-    digest: e2ed5d5a6544319a9aa304312f200fcbd7ad04abc9bad835a0f8638754dd1a1e
+    digest: 8da53b46d48b6f0c073bb548fcae5b31d8b93d453b4fc7383e28668aad5f703e
     name: mychart
     type: application
     urls:
-    - https://sonamsamdupkhangsar.github.io/sonam-helm-chart/mychart-0.1.19.tgz
-    version: 0.1.19
-  - apiVersion: v2
-    appVersion: 1.29.0
-    created: "2022-07-11T16:43:26.418491-06:00"
-    description: A Helm chart for Kubernetes
-    digest: 5592ce2554c0cfa941b8f74bd3f0e9ff200e0cec48a30c9ff39800698938aa60
-    name: mychart
-    type: application
-    urls:
-    - https://sonamsamdupkhangsar.github.io/sonam-helm-chart/mychart-0.1.16.tgz
-    version: 0.1.16
-  - apiVersion: v2
-    appVersion: 1.28.0
-    created: "2022-07-11T16:43:26.416359-06:00"
-    description: A Helm chart for Kubernetes
-    digest: 9c5d625a3698de40c210d61550b734935271f1c942dd589b29c3bc7f9fdfbd81
-    name: mychart
-    type: application
-    urls:
-    - https://sonamsamdupkhangsar.github.io/sonam-helm-chart/mychart-0.1.15.tgz
-    version: 0.1.15
-generated: "2022-07-11T16:43:26.412942-06:00"
+    - https://sonamsamdupkhangsar.github.io/sonam-helm-chart/mychart-0.1.20.tgz
+    version: 0.1.20
+generated: "2022-08-08T10:09:28.943346-06:00"
