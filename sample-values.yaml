@@ -55,7 +55,7 @@ ingress:
       hosts:
         - "*.domain.com"
 
-ingress_jwt_enabled:
+ingressjwt:
   enabled: true
   ingressClass: nginx
   annotations:
@@ -98,3 +98,6 @@ postgres:
 envs:
   - name: DBNAME
     value: mydatabase
+
+postgres:
+  secretfile: myscretfile

@@ -1,5 +1,5 @@
-{{- if .Values.ingress_jwt_enabled  -}}
-{{- if .Values.ingress_jwt_enabled.enabled -}}
+{{- if .Values.ingressjwt  -}}
+{{- if .Values.ingressjwt.enabled -}}
 {{- $fullName := include "mychart.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 {{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -9,18 +9,18 @@ apiVersion: extensions/v1
 {{- end }}
 kind: Ingress
 metadata:
-  name: ingress_jwt_enabled-{{ $fullName }}
+  name: ingressjwt-{{ $fullName }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "mychart.labels" . | nindent 4 }}
-  {{- with .Values.ingress_jwt_enabled.annotations }}
+  {{- with .Values.ingressjwt.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-{{- if .Values.ingress_jwt_enabled.tls }}
+{{- if .Values.ingressjwt.tls }}
   tls:
-  {{- range .Values.ingress_jwt_enabled.tls }}
+  {{- range .Values.ingressjwt.tls }}
     - hosts:
       {{- range .hosts }}
         - {{ . | quote }}
@@ -29,7 +29,7 @@ spec:
   {{- end }}
 {{- end }}
   rules:
-  {{- range .Values.ingress_jwt_enabled.hosts }}
+  {{- range .Values.ingressjwt.hosts }}
     - host: {{ .host }}
       http:
         paths:
@@ -50,6 +50,6 @@ spec:
               {{- end }}
         {{- end }}
   {{- end }}
-  ingressClassName: {{ .Values.ingress_jwt_enabled.ingressClass }}
+  ingressClassName: {{ .Values.ingressjwt.ingressClass }}
 {{- end }}
 {{- end }}
