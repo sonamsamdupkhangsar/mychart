@@ -103,8 +103,19 @@ spec:
            {{- end }} 
               value: {{ .Values.postgres.dbname | quote }}
             - name: POSTGRES_PORT
-              value: {{ .Values.postgres.port | quote }}        
+              value: {{ .Values.postgres.port | quote }}
           {{- end }}  
+          #add secret key value pair from values file
+          {{- range .Values.secretFiles }}
+           {{- $fileName := .file }}
+           {{- range .keys }}
+            - name: {{ .name }}           
+              valueFrom:
+                secretKeyRef: 
+                    name: {{ $fileName }}
+                    key: {{ .key }}
+           {{- end }}                                     
+          {{- end }}            
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

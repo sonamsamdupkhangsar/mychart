@@ -101,3 +101,21 @@ envs:
 
 postgres:
   secretfile: myscretfile
+
+# this section shows how you can create environment variables using a secret file
+# on the k8 cluster    
+secretFiles:
+  - file: file1
+    keys:
+      - key: pgdb_username
+        name: PG_USERNAME
+      - key: pgdb_password
+        name: PG_PASSWORD
+  - file: file2abc
+    keys:
+      - key: pgdb_username
+        name: PGDB
+      - key: apple
+        name: APPLE_DB
+      
+        

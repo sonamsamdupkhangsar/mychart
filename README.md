@@ -32,6 +32,8 @@ use this feature.
 
 To remove previous Helm charts under the name 'sonam' `helm repo remove sonam`
 
+Update `Chart.yaml` to bump chart version and application version.
+
 The following instruction for updating this Helm chart.  Run the following:
 ```
 helm package .
