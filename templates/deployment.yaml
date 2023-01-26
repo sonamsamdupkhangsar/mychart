@@ -107,11 +107,13 @@ spec:
           {{- end }}  
           #add secret key value
           {{- range .Values.secretFiles }}
+           {{- range .keys }}
             - name: {{ .file }}           
               valueFrom:
                 secretKeyRef: 
                     name: {{ .file }}
-                    key: {{ .name }}                            
+                    key: {{ .key }}
+           {{- end }}                                     
           {{- end }}            
       {{- with .Values.nodeSelector }}
       nodeSelector:
