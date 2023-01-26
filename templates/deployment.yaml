@@ -105,13 +105,14 @@ spec:
             - name: POSTGRES_PORT
               value: {{ .Values.postgres.port | quote }}
           {{- end }}  
-          #add secret key value
+          #add secret key value pair from values file
           {{- range .Values.secretFiles }}
+           {{- $fileName := .file }}
            {{- range .keys }}
-            - name: {{ .file }}           
+            - name: {{ .name }}           
               valueFrom:
                 secretKeyRef: 
-                    name: {{ .file }}
+                    name: {{ $fileName }}
                     key: {{ .key }}
            {{- end }}                                     
           {{- end }}            
