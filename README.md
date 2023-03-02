@@ -31,9 +31,17 @@ secretFiles:
       - key: apple
         name: APPLE_DB
 ```
-
 The `name` field will be set as an environment variable for application to consume.
 
+It also supports creation of SealedSecrets by referencing the encrypted value in the `sealed-secret.yaml` file.  The following is an example:
+```
+sealedSecrets:
+ - key: username
+   value: <encrypted-secret-value-here>
+ - key: password  
+   value: <encrypted-secret-value-here>
+```
+              
 For users, add the following chart to your environment:
 
 ```helm repo add sonam https://sonamsamdupkhangsar.github.io/sonam-helm-chart/```

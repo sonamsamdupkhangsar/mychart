@@ -117,5 +117,11 @@ secretFiles:
         name: PGDB
       - key: apple
         name: APPLE_DB
+
+sealedSecrets:
+ - key: username
+   value: somedummyvalue-which-should-be-encrypted
+ - key: password
+   value: somedummyvalue-which-should-be-encrypted
       
         
