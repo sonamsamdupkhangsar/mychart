@@ -14,6 +14,26 @@ and secret environment variables using GITHUB secrets as envrionment variables s
 
 This chart can also support creation of environment variables for a postgres deployment.
 
+
+The version 0.1.23 supports referencing multiple secret files using the following in a values.yaml file:
+```
+secretFiles:
+  - file: file1
+    keys:
+      - key: pgdb_username
+        name: PG_USERNAME
+      - key: pgdb_password
+        name: PG_PASSWORD
+  - file: file2abc
+    keys:
+      - key: pgdb_username
+        name: PGDB
+      - key: apple
+        name: APPLE_DB
+```
+
+The `name` field will be set as an environment variable for application to consume.
+
 For users, add the following chart to your environment:
 
 ```helm repo add sonam https://sonamsamdupkhangsar.github.io/sonam-helm-chart/```
