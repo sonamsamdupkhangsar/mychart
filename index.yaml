@@ -3,12 +3,12 @@ entries:
   mychart:
   - apiVersion: v2
     appVersion: 1.38.0
-    created: "2023-03-03T08:38:21.483332-07:00"
+    created: "2023-03-03T09:26:40.985825-07:00"
     description: A Helm chart for Kubernetes
-    digest: e9372af1f5d6203b52feaca079986a591733f62a3de26551418b439bab176d81
+    digest: f875df1d83450fe7c341dff1ac6fed822e508eab6b8000d756064369783ae8e4
     name: mychart
     type: application
     urls:
     - https://sonamsamdupkhangsar.github.io/sonam-helm-chart/mychart-0.1.25.tgz
     version: 0.1.25
-generated: "2023-03-03T08:38:21.482536-07:00"
+generated: "2023-03-03T09:26:40.984696-07:00"
