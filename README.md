@@ -33,15 +33,6 @@ secretFiles:
 ```
 The `name` field will be set as an environment variable for application to consume.
 
-It also supports creation of SealedSecrets by referencing the encrypted value in the `sealed-secret.yaml` file.  The following is an example:
-```
-sealedSecrets:
- - key: username
-   value: <encrypted-secret-value-here>
- - key: password  
-   value: <encrypted-secret-value-here>
-```
-              
 For users, add the following chart to your environment:
 
 ```helm repo add sonam https://sonamsamdupkhangsar.github.io/sonam-helm-chart/```
@@ -85,4 +76,27 @@ helm upgrade --install --timeout 5m0s \
             --set "project=echo" \            
             echo \
             sonam/mychart -f values-echo-oauth-backend.yaml --version 0.1.16 --namespace=backend --dry-run
+```
+
+To deploy a docker image from github container registry:
+```
+export CR_PAT=<YOUR_PERSONAL_ACCESS_TOKEN_FROM_GITHUB>
+
+echo $CR_PAT | docker login ghcr.io -u <USERNAME> --password-stdin
+
+export PROJECT_NAME=discovery-service
+
+helm upgrade --install --timeout 5m0s \
+    --set "image.repository=ghcr.io/sonamsamdupkhangsar/$PROJECT_NAME" \
+    --set "image.tag=latest" \
+    --set "project=$PROJECT_NAME" \
+    $PROJECT_NAME \
+    sonam/mychart -f <PATH_TO_VALUES>/values-backend.yaml --version 0.1.26 --namespace=backend
+
+
+or
+
+helm install eds ../../github/sonam-helm-chart -f ../spring-cloud-gateway/discovery-service/values-backend-local.yaml --namespace=backend
+
+
 ```

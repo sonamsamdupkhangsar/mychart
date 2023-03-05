@@ -106,10 +106,11 @@ secretFiles:
       - key: apple
         name: APPLE_DB
 
-sealedSecrets:
- - key: eureka_username
-   value: somedummyvalue-which-should-be-encrypted
- - key: eureka_password
-   value: somedummyvalue-which-should-be-encrypted
-      
+# the sealedSecrets is not working at this time.  So don't use it.
+# The manifest is generated but is not getting applied.
+#sealedSecrets:
+# - key: eureka_username
+#   value: ENCRYVALUE
+# - key: eureka_password
+#   value: ENCRYVALUE
         
